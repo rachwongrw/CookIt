@@ -13,9 +13,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
   @IBOutlet weak var tableView: UITableView!
 
   var recipes: [Recipe] = [
-    Recipe(title: "Best Brownies", steps: [], img: "https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg"),
-    Recipe(title: "Banana Bread", steps: [],  img: "https://images.pexels.com/photos/830894/pexels-photo-830894.jpeg"),
-    Recipe(title: "Chocolate Chip Cookies", steps: [], img: "https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg")
+    Recipe(title: "Best Brownies", steps: ["Step1", "Step2"], img: "https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg"),
+    Recipe(title: "Banana Bread", steps: ["Step1", "Step2"],  img: "https://images.pexels.com/photos/830894/pexels-photo-830894.jpeg"),
+    Recipe(title: "Chocolate Chip Cookies", steps: ["Step1", "Step2"], img: "https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg")
   ]
   
   override func viewDidLoad() {
@@ -39,7 +39,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let recipe = recipes[indexPath.row]
     cell.textLabel?.text = recipe.title
     
-    if let url = URL(string: recipe.img), let data = try? Data(contentsOf: url) {
+    if let url = URL(string: recipe.img),
+      let data = try? Data(contentsOf: url) { // Data has a throw, so need to add the try. It's `try?` so we don't need to add the catch block
       // UIImage takes in a data type. We cannot directly add the picture url as it is technically a string type.
       // To convert the string URL to data type, Data takes in a URL type (and not string type)
       // Hence, we need to convert the picture url string to URL type before going into Data
